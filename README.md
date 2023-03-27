@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Web Flask
 
 This was a sub-project within AirBnB in which I began working with Flask
