@@ -1,0 +1,14 @@
+header {
+    background: #ffffff;
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+    display: flex;
+    align-items: center;
+}
+/* Estilo para el logo */
+header .logo {
+  background: url("..images/logo.png") no-repeat;
+  height: 100%;
+  margin-left: 20px;
+}
