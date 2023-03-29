@@ -1,8 +1,6 @@
 #!/usr/bin/python3
-"""
-    Sript that starts a Flask web application
-"""
-from flask import Flask, render_template, request, jsonify
+""" Script that runs an app with Flask framework """
+from flask import Flask, render_template
 from models import storage
 from models.state import State
 
@@ -10,22 +8,24 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route('/states_list', strict_slashes=False)
-def states_list():
-    states = storage.all(State)
-    sorted_states = sorted(states.values(), key=lambda state: state.name)
-
-    state_info = []
-    for state in sorted_states:
-        state_info.append("{}: <B>{}</B>".format(state.id, state.name))
-
-    return render_template('7-states_list.html', states=state_info)
-
-
 @app.teardown_appcontext
-def teardown_db(exception):
+def teardown_session(exception):
+    """ Teardown """
     storage.close()
 
+
+@app.route('/states_list', strict_slashes=False)
+def display_html():
+    """ Function called with /states_list route """
+    states = storage.all(State)
+    dict_to_html = {value.id: value.name for value in states.values()}
+    return render_template('7-states_list.html',
+                           Table="States",
+                           items=dict_to_html)
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
