@@ -7,6 +7,7 @@ from sqlalchemy import Column, Integer, String
 import models
 from models.city import City
 import shlex
+from os import getenv
 
 
 class State(BaseModel, Base):
@@ -33,3 +34,15 @@ class State(BaseModel, Base):
             if (elem.state_id == self.id):
                 result.append(elem)
         return (result)
+
+    if getenv('HBNB_TYPE_STORAGE') != 'db':
+        @property
+        def cities(self):
+            """returns cities for current state"""
+            from models import storage
+
+            cities = []
+            for k, v in storage.all(City).items():
+                if self.id == v.__dict__['state_id']:
+                    cities.append(v)
+            return cities
