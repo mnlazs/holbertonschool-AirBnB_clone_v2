@@ -120,4 +120,3 @@ e6ee5344-04ef-454d-84e4-ba6fc613f1b4
 
 * Ricardo Corona - @LW068
 * Manuel Zambrado - @mnlazs
->>>>>>> 8649b7c78c1ccd5355cb25c22a380ee5336f5e3e
